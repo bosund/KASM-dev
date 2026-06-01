@@ -93,8 +93,11 @@ RUN LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit
     && tar -C /usr/local/bin -xzf /tmp/lazygit.tar.gz lazygit \
     && rm -f /tmp/lazygit.tar.gz
 
-######### MCP-server npm-pakker (globalt) #########
-RUN npm install -g @upstash/context7-mcp @masonator/coolify-mcp
+######### Globale npm-pakker & MCP-servere #########
+RUN npm install -g yarn npm-check-updates serve typescript ts-node \
+    @upstash/context7-mcp @masonator/coolify-mcp gitnexus \
+    @modelcontextprotocol/server-sequential-thinking @neondatabase/mcp-server \
+    @supabase/mcp-server-supabase
 
 ######### zsh + oh-my-zsh i default-profil #########
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended

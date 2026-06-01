@@ -85,8 +85,8 @@ RUN LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit
     && rm -f /tmp/lazygit.tar.gz
 
 ######### Globale npm-pakker & MCP-servere #########
-RUN npm install -g yarn npm-check-updates serve typescript ts-node \
-    @upstash/context7-mcp @masonator/coolify-mcp gitnexus \
+RUN npm install -g yarn npm-check-updates serve typescript ts-node
+RUN npm install -g @upstash/context7-mcp @masonator/coolify-mcp \
     @modelcontextprotocol/server-sequential-thinking @neondatabase/mcp-server \
     @supabase/mcp-server-supabase
 

@@ -79,7 +79,7 @@ RUN LAZYGIT_VERSION=$(curl -sI https://github.com/jesseduffield/lazygit/releases
 ######### Globale npm-pakker & MCP-servere #########
 RUN npm install -g yarn npm-check-updates serve typescript ts-node
 RUN npm install -g @upstash/context7-mcp @masonator/coolify-mcp \
-    @modelcontextprotocol/server-sequential-thinking @neondatabase/mcp-server \
+    @modelcontextprotocol/server-sequential-thinking @neondatabase/mcp-server-neon \
     @supabase/mcp-server-supabase
 
 ######### zsh + oh-my-zsh i default-profil #########

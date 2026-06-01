@@ -44,9 +44,7 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
     && rm -rf /var/lib/apt/lists/*
 
 ######### VS Code #########
-RUN VSCODE_VERSION=$(curl -s https://api.github.com/repos/microsoft/vscode/releases/latest | grep '"tag_name"' | sed 's/.*"\(.*\)".*/\1/') \
-    && wget -qO /tmp/vscode.deb \
-       "https://update.code.visualstudio.com/${VSCODE_VERSION}/linux-deb-x64/stable" \
+RUN wget -qO /tmp/vscode.deb "https://update.code.visualstudio.com/latest/linux-deb-x64/stable" \
     && dpkg -i /tmp/vscode.deb \
     && rm -f /tmp/vscode.deb
 
@@ -60,11 +58,7 @@ RUN curl -fsSL https://cdn.coolify.io/cli/install.sh | bash 2>/dev/null || true
 RUN npm install -g vercel
 
 ######### Supabase CLI #########
-RUN SUPABASE_VERSION=$(curl -s https://api.github.com/repos/supabase/cli/releases/latest | grep '"tag_name"' | sed 's/.*"v\(.*\)".*/\1/') \
-    && wget -qO /tmp/supabase.deb \
-       "https://github.com/supabase/cli/releases/latest/download/supabase_${SUPABASE_VERSION}_linux_amd64.deb" \
-    && dpkg -i /tmp/supabase.deb \
-    && rm -f /tmp/supabase.deb
+RUN npm install -g supabase
 
 ######### Tailscale #########
 RUN curl -fsSL https://tailscale.com/install.sh | sh
@@ -76,8 +70,7 @@ RUN curl -fsSL https://get.docker.com | sh
 RUN npm install -g pnpm
 
 ######### lazygit #########
-RUN LAZYGIT_VERSION=$(curl -s https://api.github.com/repos/jesseduffield/lazygit/releases/latest \
-      | grep '"tag_name"' | sed 's/.*"v\(.*\)".*/\1/') \
+RUN LAZYGIT_VERSION=$(curl -sI https://github.com/jesseduffield/lazygit/releases/latest | grep -i "location:" | sed -n 's/.*tag\/v\(.*\)/\1/p' | tr -d '\r') \
     && curl -Lo /tmp/lazygit.tar.gz \
        "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz" \
     && tar -C /usr/local/bin -xzf /tmp/lazygit.tar.gz lazygit \

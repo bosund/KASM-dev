@@ -14,7 +14,7 @@ ghcr.io/bosund/kasm-dev:latest
 |----------|-----------|
 | **IDE** | VS Code |
 | **AI Coding** | Claude Code CLI + VS Code extension, GitHub Copilot + Copilot Chat |
-| **Runtime** | Node.js 22, Python 3.13, pnpm |
+| **Runtime** | Node.js 24, Python 3.14, pnpm |
 | **Deployment CLI** | Vercel CLI, Supabase CLI, Coolify CLI, Docker CLI |
 | **Versionsstyring** | GitHub CLI (`gh`), lazygit |
 | **Database** | PostgreSQL client (`psql`) |

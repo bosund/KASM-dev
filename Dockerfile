@@ -21,17 +21,17 @@ RUN wget -qO /usr/local/bin/yq \
       "https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64" \
     && chmod +x /usr/local/bin/yq
 
-######### Node.js 22 #########
-RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+######### Node.js 24 #########
+RUN curl -fsSL https://deb.nodesource.com/setup_24.x | bash - \
     && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
-######### Python 3.13 #########
+######### Python 3.14 #########
 RUN add-apt-repository ppa:deadsnakes/ppa -y \
     && apt-get update \
-    && apt-get install -y python3.13 python3.13-venv python3.13-dev python3-pip \
-    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.13 1 \
-    && update-alternatives --install /usr/bin/python python /usr/bin/python3.13 1 \
+    && apt-get install -y python3.14 python3.14-venv python3.14-dev python3-pip \
+    && update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.14 1 \
+    && update-alternatives --install /usr/bin/python python /usr/bin/python3.14 1 \
     && rm -rf /var/lib/apt/lists/*
 
 ######### GitHub CLI #########

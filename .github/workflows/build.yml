@@ -3,6 +3,10 @@ name: Build KASM Image
 on:
   push:
     branches: [main]
+    paths:
+      - 'Dockerfile'
+      - 'startup/**'
+      - '.github/workflows/build.yml'
   schedule:
     - cron: "0 4 * * 1"  # Hver mandag kl. 04:00 UTC
   workflow_dispatch:       # Manuel trigger fra GitHub UI
@@ -39,6 +43,9 @@ jobs:
             type=schedule,pattern={{date 'YYYY-MM-DD'}}
             type=sha,prefix=sha-
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -46,6 +53,7 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: .
+          platforms: linux/amd64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

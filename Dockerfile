@@ -51,15 +51,6 @@ RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc \
     && apt-get update && apt-get install -y code \
     && rm -rf /var/lib/apt/lists/*
 
-######### Antigravity IDE #########
-# Verificér den præcise .deb-URL på https://antigravity.google/download inden build
-RUN wget -O /tmp/antigravity.deb "https://antigravity.google/download/linux/amd64/latest" \
-    && dpkg -i /tmp/antigravity.deb || apt-get install -f -y \
-    && rm -f /tmp/antigravity.deb
-
-######### Antigravity CLI #########
-RUN curl -fsSL https://antigravity.google/cli/install.sh | bash
-
 ######### Claude Code CLI #########
 RUN npm install -g @anthropic-ai/claude-code
 

@@ -44,12 +44,11 @@ RUN curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg \
     && rm -rf /var/lib/apt/lists/*
 
 ######### VS Code #########
-RUN wget -qO- https://packages.microsoft.com/keys/microsoft.asc \
-      | gpg --dearmor > /etc/apt/trusted.gpg.d/packages.microsoft.gpg \
-    && echo "deb [arch=amd64 signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" \
-      > /etc/apt/sources.list.d/vscode.list \
-    && apt-get update && apt-get install -y code \
-    && rm -rf /var/lib/apt/lists/*
+RUN VSCODE_VERSION=$(curl -s https://api.github.com/repos/microsoft/vscode/releases/latest | grep '"tag_name"' | sed 's/.*"\(.*\)".*/\1/') \
+    && wget -qO /tmp/vscode.deb \
+       "https://update.code.visualstudio.com/${VSCODE_VERSION}/linux-deb-x64/stable" \
+    && dpkg -i /tmp/vscode.deb \
+    && rm -f /tmp/vscode.deb
 
 ######### Claude Code CLI #########
 RUN npm install -g @anthropic-ai/claude-code
